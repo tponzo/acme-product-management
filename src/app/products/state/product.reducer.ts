@@ -124,5 +124,16 @@ export const productReducer = createReducer<ProductState>(
       ...state,
       error: action.error,
     };
+  }),
+  on(ProductActions.deleteProductSuccess, (state): ProductState => {
+    return {
+      ...state,
+    };
+  }),
+  on(ProductActions.deleteProductFailure, (state, action): ProductState => {
+    return {
+      ...state,
+      error: action.error,
+    };
   })
 );

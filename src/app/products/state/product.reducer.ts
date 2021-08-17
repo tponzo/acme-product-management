@@ -8,6 +8,7 @@ import * as AppState from '../../state/app.state';
 import * as ProductActions from './product.actions';
 import { Product } from '../product';
 import { state } from '@angular/animations';
+import { ProductListComponent } from '../product-list/product-list.component';
 
 export interface State extends AppState.State {
   products: ProductState;
@@ -125,12 +126,29 @@ export const productReducer = createReducer<ProductState>(
       error: action.error,
     };
   }),
-  on(ProductActions.deleteProductSuccess, (state): ProductState => {
+  on(ProductActions.deleteProductSuccess, (state, action): ProductState => {
     return {
       ...state,
+      products: state.products.filter((product) => product.id !== action.id),
+      currentProductId: null,
+      error: '',
     };
   }),
   on(ProductActions.deleteProductFailure, (state, action): ProductState => {
+    return {
+      ...state,
+      error: action.error,
+    };
+  }),
+  on(ProductActions.createProductSuccess, (state, action): ProductState => {
+    return {
+      ...state,
+      products: [...state.products, action.product],
+      currentProductId: action.product.id,
+      error: '',
+    };
+  }),
+  on(ProductActions.createProductFailure, (state, action): ProductState => {
     return {
       ...state,
       error: action.error,

@@ -49,10 +49,26 @@ export const deleteProduct = createAction(
 );
 
 export const deleteProductSuccess = createAction(
-  '[Product] Delete Product Success'
+  '[Product] Delete Product Success',
+  props<{ id: number }>()
 );
 
 export const deleteProductFailure = createAction(
   '[Product] Delete Product Fail',
+  props<{ error: string }>()
+);
+
+export const createProduct = createAction(
+  '[Product] Create Product',
+  props<{ product: Product }>()
+);
+
+export const createProductSuccess = createAction(
+  '[Product] Create Product Success',
+  props<{ product }>()
+);
+
+export const createProductFailure = createAction(
+  '[Product] Create Product Fail',
   props<{ error: string }>()
 );

@@ -114,10 +114,10 @@ export class ProductEditComponent implements OnInit {
     }
   }
 
-  cancelEdit(product: Product): void {
-    // Redisplay the currently selected product
-    // replacing any edits made
-    this.displayProduct(product);
+  cancelEdit(): void {
+    // Close current product
+    this.displayProduct(null);
+    this.store.dispatch(ProductActions.clearCurrentProduct());
   }
 
   deleteProduct(product: Product): void {
